@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  raspberrypi:
+    container_name: rpi_application
+    tty: true
+    stdin_open: true
+    image: theja0473/rpi_mqtt:1.0
+    environment:
+      BROKER: '15.206.172.147'
+      PORT: 1883
+      SUB_TOPIC: "TopicDeviceVersionURL"
+      PUB_TOPIC: "TopicCurrentDeviceVerison"
+      localfile: "data.txt"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
+    network_mode: host
